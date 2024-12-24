@@ -1,1 +1,1 @@
-# leetcode_js
+Решаю задачки с leetcode на JS
