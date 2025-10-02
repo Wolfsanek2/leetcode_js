@@ -21,14 +21,23 @@ function TreeNode(val, left, right) {
  * @return {number}
  */
 var maxDepth = function (root) {
-	if (root === null) {
+	if (!root) {
 		return 0;
 	}
-	if (root.left === null) {
-		return maxDepth(root.right) + 1;
+	let result = 1;
+	const stack = [{ node: root, depth: 1 }];
+	while (stack.length) {
+		const { node, depth } = stack.pop();
+		const { left, right } = node;
+		if (depth > result) {
+			result = depth;
+		}
+		if (right) {
+			stack.push({ node: right, depth: depth + 1 });
+		}
+		if (left) {
+			stack.push({ node: left, depth: depth + 1 });
+		}
 	}
-	if (root.right === null) {
-		return maxDepth(root.left) + 1;
-	}
-	return Math.max(maxDepth(root.left) + 1, maxDepth(root.right) + 1);
+	return result;
 };
